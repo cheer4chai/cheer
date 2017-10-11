@@ -1,0 +1,80 @@
+.dialogWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    z-index: 99999;
+}
+
+.dialogWrapper .dialog {
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb( 232, 110, 52);
+    border-radius: 6px;
+    background-color: rgb( 255, 255, 255);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -280px;
+    margin-top: -100px;
+    width: 560px;
+    min-height: 180px;
+}
+
+.dialog .title {
+    height: 48px;
+    line-height: 48px;
+    background-color: #df5350;
+    color: white;
+    padding: 0 20px;
+}
+
+.dialogWrapper .close {
+    float: right;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    margin: 17px 0;
+    cursor: pointer;
+    font-style: normal;
+    font-size: 24px;
+}
+
+.dialogWrapper .content {
+    padding: 25px 30px;
+    font-size: 16px;
+    line-height: 30px;
+    background-color: white;
+}
+
+.dialogWrapper .buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.buttons .cancleButton {
+    width: 121px;
+    height: 33px;
+    border-radius: 4px;
+    background-color: rgb( 153, 153, 153);
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.dialogWrapper .buttons .confirmButton {
+    width: 121px;
+    height: 33px;
+    border-radius: 4px;
+    background-color: #df5350;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.m_l_20 {
+    margin-left: 20px;
+}

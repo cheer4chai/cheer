@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../lib/cheer.js"></script>
+    <title>test</title>
+</head>
+
+<body>
+    <div id="test">
+        <span class="q">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </span>
+        <span class="w">2</span>
+    </div>
+    <script>
+        console.log(cheer)
+        var dom = new cheer.dom();
+        let test = document.getElementById('test')
+        var validate = new cheer.validate();
+        console.log(validate.certificateNumber(412728198907237516))
+        var stringFun = new cheer.string();
+        console.log(stringFun.format('test<%=data%>', {
+            'data': 'hhhh'
+        }))
+    </script>
+</body>
+
+</html>
