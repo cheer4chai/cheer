@@ -131,4 +131,14 @@ export default class validate {
         return this.result;
 
     }
+
+    passWord(str) {
+        this.map = {
+            '-1': '密码必须是包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间。',
+        }
+        if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$/g.test(str)) {
+            setResult(-1);
+            return this.result;
+        }
+    }
 }
