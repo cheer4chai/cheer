@@ -6,32 +6,6 @@ export default class cookie {
     }
 
     /* 
-    @param sDomain 域名
-    @param oWin 窗口对象
-    @return {window}
-    */
-    findWindow(sDomain, oWin) {
-        if (!oWin) {
-            if (window.location.hostname.indexOf(sDomain) >= 0) {
-                return window;
-            }
-            return arguments.callee.apply(this, [sDomain, top]);
-        }
-        try {
-            if (oWin.location.hostname.indexOf(sDomain) >= 0) {
-                return oWin;
-            }
-        } catch (e) {}
-        for (let i = 0; i < oWin.frames.length; ++i) {
-            let oFind = arguments.callee.apply(this, [sDomain, oWin.frames[i]]);
-            if (oFind) {
-                return oFind;
-            }
-        }
-        return null;
-    }
-
-    /* 
 	@param sName cookie名
     @param sValue cookie值
     @param nExpireSec cookie时限
@@ -58,12 +32,11 @@ export default class cookie {
         if (sPath) {
             sCookie += "path=" + sPath + ";";
         }
-        let oWin = this.findWindow(sDomain);
-        if (!oWin) {
+        if (!document) {
             return false;
         }
         try {
-            oWin.document.cookie = sCookie;
+            document.document.cookie = sCookie;
         } catch (e) {
             return false;
         }
@@ -75,10 +48,8 @@ export default class cookie {
     @param sDomain cookie的域名
     @return {window}
     */
-    get(sName, sDomain) {
-        sDomain = sDomain;
-        let oWin = sDomain ? (this.findWindow(sDomain) || window) : window;
-        return param.getParam(oWin.document.cookie, sName, "; ", "=");
+    get(sName) {
+        return param.getParam(window.document.cookie, sName, "; ", "=");
     }
 
 }

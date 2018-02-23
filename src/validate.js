@@ -141,4 +141,21 @@ export default class validate {
             return this.result;
         }
     }
+
+    telephone(str) {
+        this.map = {
+            '-1': '电话号码不能为空',
+            '-2': '请输入正确格式的电话号码'
+        }
+        str = str.toString();
+        if (str == '') {
+            this.setResult(-1);
+            return this.result;
+        }
+        var result = str.match(/\d{3}-\d{8}|\d{4}-\d{7}/); 
+    　　if (result == null) {
+            setResult(-2);
+        }
+        return this.result;
+    }
 }

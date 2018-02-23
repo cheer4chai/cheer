@@ -2,34 +2,39 @@ export default class string {
 
     constructor() {}
 
-    format(str, data) {
-        var _format = /<%=([\d\w\.]+)%>/g;
-        var args = Array.prototype.slice.call(arguments),
-            v;
-        if (args.length === 1 && typeof(args[0]) === 'object') {
-            args = args[0];
-        }
-        _format.lastIndex = 0;
+    render(template, data) {
+        const spliter = /\<\%.*?\%\>/g
+        const plain = template.split(spliter)
+        const dynamic = template.match(spliter).map(str => str.startsWith(`<%=`) ? `yield(${str.slice(3, -2).trim()})` : str.slice(2, -2).trim())
+        const code = plain.map((txt, i) => i in dynamic ? `yield(${JSON.stringify(txt)})\n${dynamic[i]}\n` : `yield(${JSON.stringify(txt)})\n`).join('')
+        const params = Object.getOwnPropertyNames(data)
+        const output = []
+        new Function(...params, "yield", code)(...params.map(name => data[name]), t => output.push(t))
+        return output.join('')
+    }
 
-        function route(obj, path) {
-            obj = obj || {};
-            var r = /([\d\w_]+)/g,
-                m;
-            r.lastIndex = 0;
-            while ((m = r.exec(path)) != null) {
-                obj = obj[m[0]];
-                if (obj === undefined || obj === null) {
-                    break;
-                }
-            }
-            return obj;
+    LENFix(i, n) {
+        let sRat = i.toString();
+        while(sRat.length<n) {
+            sRat = '0' + sRat;
         }
+        return sRat;
+    }
 
-        return str.replace(_format,
-            function(m, n) {
-                v = route(data, n);
-                return v === undefined ? m : v;
-            });
+    dateFormat(date, format) {
+        const dateType = '[object Date]'
+        if(Object.prototype.toString.call(date) !== dateType) return;
+        format = format || "%Y-%m-%d";
+        let mapData = {
+            '%Y': date.getFullYear(),
+            '%m': this.LENFix(date.getMonth()+1,2),
+            '%d': this.LENFix(date.getDate(),2),
+            '%M': this.LENFix(date.getMinutes(),2),
+            '%S': this.LENFix(date.getSeconds(),2)
+        }
+        return format.replace(/%[YmdHMS]/g, function(sData) {
+            return mapData[sData];
+        })
     }
 
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="../lib/cheer.js"></script>
+    <script src="../lib/cheer.min.js"></script>
     <title>test</title>
 </head>
 
@@ -27,9 +27,11 @@
         var validate = new cheer.validate();
         console.log(validate.certificateNumber(412728198907237516))
         var stringFun = new cheer.string();
-        console.log(stringFun.format('test<%=data%>', {
+        console.log(stringFun.render('test<%=data%>', {
             'data': 'hhhh'
         }))
+        console.log(stringFun.dateFormat(new Date()))
+
     </script>
 </body>
 
