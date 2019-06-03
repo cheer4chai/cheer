@@ -1,6 +1,6 @@
 {
   "name": "cheer",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A tool library with webpack and es6",
   "main": "lib/library.js",
   "scripts": {
